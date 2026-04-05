@@ -1,0 +1,9 @@
+{
+  "name": "train-ticket-price-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/server",
+    "packages/web"
+  ]
+}
