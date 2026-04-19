@@ -7,6 +7,13 @@ export interface SMTPConfig {
   from: string;
 }
 
+export interface AppConfig {
+  dbUrl: string;
+  jwtSecret: string;
+  port: number;
+  smtp: SMTPConfig;
+}
+
 function getEnv(key: string, defaultValue?: string): string {
   const value = process.env[key];
   if (!value && !defaultValue) {
@@ -28,5 +35,14 @@ export function getSMTPConfig(): SMTPConfig {
     user: getEnv('SMTP_USER'),
     pass: getEnv('SMTP_PASS'),
     from: getEnv('SMTP_FROM', 'noreply@pricetracker.local'),
+  };
+}
+
+export function getAppConfig(): AppConfig {
+  return {
+    dbUrl: getEnv('DB_URL'),
+    jwtSecret: getEnv('JWT_SECRET'),
+    port: getEnvNumber('PORT', 3001),
+    smtp: getSMTPConfig(),
   };
 }
