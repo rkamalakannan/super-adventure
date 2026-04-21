@@ -1,7 +1,7 @@
 {
   "name": "traintracker-mobile",
   "version": "1.0.0",
-  "main": "expo-router/entry",
+  "main": "App.tsx",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -16,7 +16,6 @@
     "@react-navigation/native-stack": "^6.11.0",
     "axios": "^1.7.2",
     "expo": "~51.0.28",
-    "expo-router": "~3.5.23",
     "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
     "react-native": "0.74.5",
