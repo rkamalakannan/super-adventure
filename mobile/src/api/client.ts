@@ -2,7 +2,8 @@ import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Update this URL to point to your backend server
-const API_URL = 'http://localhost:3000/api';
+// Use Expo environment variable for deployment, fallback to localhost for development
+const API_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:3000/api';
 
 export interface User {
   id: number;

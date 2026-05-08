@@ -40,7 +40,7 @@ export function getSMTPConfig(): SMTPConfig {
 
 export function getAppConfig(): AppConfig {
   return {
-    dbUrl: getEnv('DB_URL'),
+    dbUrl: getEnv('DATABASE_URL') || getEnv('DB_URL'),
     jwtSecret: getEnv('JWT_SECRET'),
     port: getEnvNumber('PORT', 3001),
     smtp: getSMTPConfig(),
