@@ -2,25 +2,30 @@
 
 ## Backend
 
-The backend is Dockerized and ready for Railway.
+The backend is Dockerized and ready for Railway with automatic PostgreSQL setup.
 
-### Steps:
+### Quick Start:
 
 1. **Create a Railway account** at https://railway.app
 2. **Create a new project** and select "Deploy from GitHub"
 3. **Connect your GitHub repository** (this repo)
-4. **Railway will automatically detect the Dockerfile** and build the backend service.
-5. **Add a PostgreSQL plugin**:
-   - In your Railway project, click on "+" -> "Add Plugin" -> search for "PostgreSQL" and add the official PostgreSQL plugin.
-6. **Set environment variables** in the Railway dashboard (Variables tab):
-   - `JWT_SECRET`: a strong secret string (e.g., generate with `openssl rand -hex 32`)
+4. **Railway will automatically**:
+   - Detect the `Dockerfile` and build the backend
+   - Read `railway.json` and provision a PostgreSQL 15 plugin
+   - Set the `DATABASE_URL` environment variable from the PostgreSQL plugin
+5. **Set required environment variables** in Railway dashboard (Variables tab):
+   - `JWT_SECRET`: a strong secret string (e.g., `openssl rand -hex 32`)
    - Optional for email notifications:
-     - `SMTP_HOST`
-     - `SMTP_PORT` (default 587)
-     - `SMTP_USER`
-     - `SMTP_PASS`
-     - `SMTP_FROM` (defaults to `noreply@pricetracker.local`)
-   - Note: The `DATABASE_URL` will be automatically provided by the PostgreSQL plugin. Our backend is configured to read `DATABASE_URL` first, then fall back to `DB_URL`.
+     - `SMTP_HOST`: SMTP server (e.g., smtp.gmail.com)
+     - `SMTP_PORT`: SMTP port (default 587)
+     - `SMTP_USER`: SMTP username
+     - `SMTP_PASS`: SMTP password
+     - `SMTP_FROM`: sender email (default `noreply@pricetracker.local`)
+
+### How it works:
+- The `railway.json` file declares a PostgreSQL plugin, which Railway will auto-provision.
+- The PostgreSQL plugin provides the `DATABASE_URL` environment variable.
+- The backend reads `DATABASE_URL` first, then falls back to `DB_URL` if needed.
 
 ### Health Check
 Once deployed, you can check the health of the backend at:

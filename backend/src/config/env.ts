@@ -39,8 +39,12 @@ export function getSMTPConfig(): SMTPConfig {
 }
 
 export function getAppConfig(): AppConfig {
+  const dbUrl = process.env.DATABASE_URL || process.env.DB_URL;
+  if (!dbUrl) {
+    throw new Error('Missing required environment variable: DATABASE_URL or DB_URL');
+  }
   return {
-    dbUrl: getEnv('DATABASE_URL') || getEnv('DB_URL'),
+    dbUrl,
     jwtSecret: getEnv('JWT_SECRET'),
     port: getEnvNumber('PORT', 3001),
     smtp: getSMTPConfig(),
